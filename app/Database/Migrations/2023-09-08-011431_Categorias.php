@@ -12,6 +12,7 @@ class Categorias extends Migration
             'id' => [
                 'type' => 'INT',
                 'constraint' => 11,
+                'unsigned' => true,
                 'auto_increment' => true,
                 'null' => false
             ],
@@ -21,11 +22,12 @@ class Categorias extends Migration
             ],
             'usuarios_id' => [
                 'type' => 'INT',
-                'constraint' => 11
+                'constraint' => 11,
+                'unsigned' => true,
             ]
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('usuarios_id', 'usuarios', 'id');
+        $this->forge->addForeignKey('usuarios_id', 'usuarios', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('categorias');
     }
 
@@ -33,5 +35,4 @@ class Categorias extends Migration
     {
         $this->forge->dropTable('categorias');
     }
-
 }
