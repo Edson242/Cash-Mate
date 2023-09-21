@@ -1,7 +1,5 @@
 <?php
 
-class administrador extends usuario{
-
-
-    
+class administrador extends usuario
+{
 }

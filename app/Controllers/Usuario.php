@@ -1,6 +1,7 @@
 <?php
 
-class usuario extends Pessoas{
+class usuario extends Pessoas
+{
     private $email;
     private $senha;
     private $tipo;
@@ -8,32 +9,38 @@ class usuario extends Pessoas{
 
     public function __construct($email, $senha, $tipo)
     {
-        $this-> email = $email;
-        $this-> senha = $senha;
-        $this-> tipo = $tipo; 
+        $this->email = $email;
+        $this->senha = $senha;
+        $this->tipo = $tipo;
     }
 
-    public function getNome() {
+    public function getNome()
+    {
         return $this->email;
     }
 
-    public function setNome($email){
-        $this-> email = $email;
+    public function setNome($email)
+    {
+        $this->email = $email;
     }
 
-    public function getEndereco(){
+    public function getEndereco()
+    {
         return $this->senha;
     }
 
-    public function setEndereco($senha){
-        $this-> senha = $senha;
+    public function setEndereco($senha)
+    {
+        $this->senha = $senha;
     }
 
-    public function getBairro(){
-        return $this-> tipo;
+    public function getBairro()
+    {
+        return $this->tipo;
     }
 
-    public function setBairro($tipo){
-        $this-> tipo = $tipo;
+    public function setBairro($tipo)
+    {
+        $this->tipo = $tipo;
     }
 }
