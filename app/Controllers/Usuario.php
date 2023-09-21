@@ -43,4 +43,34 @@ class usuario extends Pessoas
     {
         $this->tipo = $tipo;
     }
+
+
+    //Em andamento 
+    public function arterarSenha($senhaNova)
+    {
+
+        return $this->senha === $senhaNova;
+    }
+
+    //Em andamento
+    public function verificarSenha($senha)
+    {
+
+        return $this->senha === $senha;
+    }
+
+
+    //Em andamento
+    public function arterarEmail($emailNova)
+    {
+
+        return $this->email === $emailNova;
+    }
+
+    //Em andamento
+    public function verificarEmail($email)
+    {
+
+        return $this->email === $email;
+    }
 }
