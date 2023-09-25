@@ -24,6 +24,7 @@ class Categorias extends Migration
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
+                'null' => false
             ]
         ]);
         $this->forge->addKey('id', true);

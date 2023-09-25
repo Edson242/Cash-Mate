@@ -1,6 +1,6 @@
 <?php
 
-class usuario extends Pessoas
+class Usuario extends Pessoas
 {
     private $email;
     private $senha;

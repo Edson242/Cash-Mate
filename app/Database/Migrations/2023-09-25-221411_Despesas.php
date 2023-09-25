@@ -30,23 +30,21 @@ class Despesas extends Migration
             ],
             'valor' => [
                 'type' => 'DECIMAL(10, 2)',
-                'constraint' => '255',
                 'null' => false
             ],
-            'date' => [
-                'type' => 'DATE',
+            'data' => [
+                'type' => 'date',
                 'null' => false
             ],
             'descricao' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
+                'type' => 'TEXT',
                 'null' => false
-                ]
+            ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('user_id', 'usuarios', 'id',  'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('categoria_id', 'categorias', 'id',  'CASCADE', 'CASCADE');
-        $this->forge->createTable('descricao');
+        $this->forge->addForeignKey('user_id', 'usuarios', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('categoria_id', 'categorias', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('despesas');
     }
 
     public function down()

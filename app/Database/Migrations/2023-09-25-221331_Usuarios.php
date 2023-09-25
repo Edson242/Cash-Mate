@@ -10,27 +10,42 @@ class Usuarios extends Migration
     {
 
         $this->forge->addField([
-            "id" => [
+            'id' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
                 'auto_increment' => true,
                 'null' => false
             ],
-            "nome" => [
+            'nome' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
                 'null' => false
             ],
-            "email" => [
+            'email' => [
                 'type' => "VARCHAR",
                 'constraint' => 255,
                 'null' => false
             ],
-            "password" => [
+            'password' => [
                 'type' => "VARCHAR",
                 "constraint" => 255,
                 "null" => false
+            ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+                'default' => null
+            ],
+            'upsdated_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+                'default' => null
+            ],
+            'deleted_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+                'default' => null
             ]
         ]);
         $this->forge->addKey('id', true);
