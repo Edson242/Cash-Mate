@@ -7,5 +7,5 @@ use CodeIgniter\Model;
 class Despesas extends Model
 {
     protected $table            = 'despesas';
-    protected $allowedFields    = ['valor', 'data', 'descricao'];
+    protected $allowedFields    = ['user_id', 'categoria_id', 'valor', 'data', 'descricao'];
 }

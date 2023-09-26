@@ -16,7 +16,7 @@ class Gastos extends BaseController
     public $data; // Sem formatação | Aplicar formatação
     public $categoria; // Int ou Str -> Retornar em Str
 
-    public function __construct($descricao, $valor, $data, $categoria)
+    public function __construct__($descricao, $valor, $data, $categoria)
     {
         $this->_modelDespesas = new Despesas();
         $this->descricao = $descricao;
@@ -65,11 +65,10 @@ class Gastos extends BaseController
     public function calcularGastos() // Em Desenvolvimento
     {   
         // Despesas vindas do DB
-        $date = $this->_modelDespesas->findAll();
-
-        // Variável com a soma de todos os gastos
-        $gastos = $this->valor;
-        return $gastos;
+        $gastos = $this->_modelDespesas->findAll();
+        echo '<pre>';
+        print_r($gastos);
+        // return $gastos;
     }
 
 }

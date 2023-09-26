@@ -37,7 +37,7 @@ class Usuarios extends Migration
                 'null' => true,
                 'default' => null
             ],
-            'upsdated_at' => [
+            'updated_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
                 'default' => null

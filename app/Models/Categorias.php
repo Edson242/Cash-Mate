@@ -7,5 +7,5 @@ use CodeIgniter\Model;
 class Categorias extends Model
 {
     protected $table            = 'categorias';
-    protected $allowedFields    = ['nome'];
+    protected $allowedFields    = ['nome', 'usuarios_id'];
 }
