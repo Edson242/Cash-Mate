@@ -7,3 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('/dashboard', 'Home::dashboard');
+$routes->get('/gastos', 'Gastos::calcularGastos');
+$routes->get('/addDespesa', 'Gastos::addDespesaView');
+$routes->get('/deletarDespesa/(:num)', 'Gastos::deletarDespesa/$1');
+$routes->post('/addDespesas', 'Gastos::addDespesa');
+
