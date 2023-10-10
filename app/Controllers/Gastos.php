@@ -87,7 +87,7 @@ class Gastos extends BaseController
 
         // Inseri e faz uma verificação para saber se adicionou de fato a despesa
         if($this->_model->insert($date)){
-            session()->setFlashdata('sucess', 'Despesas inserida com sucesso!');
+            session()->setFlashdata('success', 'Despesas inserida com sucesso!');
             return redirect()->back();
         } else {
             session()->setFlashdata('error', 'Erro ao inserir despesa!');
@@ -104,7 +104,13 @@ class Gastos extends BaseController
             session()->setFlashdata('errorDeleted', 'Erro ao deletar sua despesa!');
             return redirect()->back();
         }
-        
+    }
+
+    public function updateDespesa($id){
+        // Pega o ID como paramêtro para buscar a Despesa 
+        $despesa = $this->_model->where('id', $id)->findAll();
+        // debug($despesa);
+        return view('updateDespesa', $despesa);
     }
 
 }

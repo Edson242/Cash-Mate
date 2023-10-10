@@ -1,9 +1,9 @@
-<?php if(session()->getFlashdata('error')): ?>
-    <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+<?php if(session()->getFlashdata('errorUpdateDespesa')): ?>
+    <div class="alert alert-danger"><?= session()->getFlashdata('errorUpdateDespesa') ?></div>
 <?php endif;?>
 
-<?php if(session()->getFlashdata('success')): ?>
-    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+<?php if(session()->getFlashdata('successUpdateDespesa')): ?>
+    <div class="alert alert-success"><?= session()->getFlashdata('successUpdateDespesa') ?></div>
 <?php endif;?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -11,19 +11,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Despesas</title>
+    <title>Atualização de Despesa</title>
 </head>
 <body>
     <div class="container form-control input-sm">
+    <?php foreach ($despesa as $despesas) :?>
         <form action="/addDespesas" method="post">
             <label for="">Valor</label><br>
-            <input class=""  type="number" name="valor" id="valor" placeholder="25"><br>
-            <label for="">Data</label><br>
+            <input class=""  type="number" name="valor" id="valor" placeholder="<?= $despesas['valor']; ?>"><br>
+            <label for="">Data <?= $despesas['data']; ?></label><br>
             <input type="date" name="data" id="data"><br>
             <label for="">Descrição</label><br>
-            <input type="text" name="descricao" id="descricao" placeholder="Lanche"><br><br>
+            <input type="text" name="descricao" id="descricao" placeholder="<?= $despesas['descricao']; ?>"><br><br>
             <input type="submit" class="btn btn-success shadow rounded" value="Enviar">
         </form>
+    <?php endforeach; ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
