@@ -12,9 +12,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Despesas</title>
+    <!-- HEITOR VAGABUNDO!! -->
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    <div class="container form-control input-sm">
+    <button class="btn btn-info shadow rounded"><a href="<?php redirect()->to('/dashboard')?>">Voltar</a></button>
+    <div class="container form-control input-sm text-center">
         <form action="/addDespesas" method="post">
             <label for="">Valor</label><br>
             <input class=""  type="number" name="valor" id="valor" placeholder="25"><br>

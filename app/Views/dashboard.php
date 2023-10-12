@@ -52,10 +52,10 @@
             <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">visão geral</a>
+                        <a class="nav-link" href="">visão geral</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">lançamentos</a>
+                        <a class="nav-link" href="/addDespesa">lançamentos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">relatórios</a>

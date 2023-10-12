@@ -24,7 +24,7 @@ class Gastos extends BaseController
         $this->categoria_id = $categoria_id;
         $this->valor = $valor;
         $this->data = $data;
-        $this->categoria = $categoria;   
+        $this->categoria = $categoria;
     }
 
     // Métodos Get
@@ -109,6 +109,7 @@ class Gastos extends BaseController
     public function updateDespesa($id){
         // Pega o ID como paramêtro para buscar a Despesa 
         $despesa = $this->_model->where('id', $id)->findAll();
+    
         // debug($despesa);
         return view('updateDespesa', $despesa);
     }
