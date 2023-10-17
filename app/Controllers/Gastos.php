@@ -105,13 +105,38 @@ class Gastos extends BaseController
             return redirect()->back();
         }
     }
-
+    // OK -> Setar FlashDatas nas View
     public function updateDespesa($id){
-        // Pega o ID como paramêtro para buscar a Despesa 
-        $despesa = $this->_model->where('id', $id)->findAll();
-    
-        // debug($despesa);
-        return view('updateDespesa', $despesa);
+        // // Pega o ID como paramêtro para buscar a Despesa 
+        // $despesa['despesa'] = $this->_model->where('id', $id)->findAll();
+
+        // // debug($despesa);
+        // return view('updateDespesa', $despesa);
+
+        if($this->request->getMethod() === 'post'){
+
+            // $validation = \Config\Services::validation();
+
+            // $validation->setRules($this->validationRules);
+            // Pega cada valor necessário para alterar no DB
+            $data = [
+                'valor' => $this->request->getPost('valor'),
+                'data' => $this->request->getPost('data'),
+                'descricao' => $this->request->getPost('descricao')
+            ];
+            // Verifica se deu certo o update e seta as Flash Data
+            if($this->_model->update($id, $data)){
+                session()->setFlashdata('successUpdate', 'Despesa alterada com sucesso!');
+                return redirect()->to('/dashboard');
+            }else{
+                session()->setFlashdata('errorUpdate', 'Erro ao alterar a despesa!');
+                return redirect()->back();
+            }
+           // Chama a View e passa os dados da despesa escolhida
+        } else{
+            $data['despesa'] = $this->_model->where('id', $id)->findAll();
+            return view('updateDespesa', $data);
+        }
     }
 
 }
