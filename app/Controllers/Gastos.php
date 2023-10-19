@@ -27,7 +27,7 @@ class Gastos extends BaseController
         $this->categoria = $categoria;
     }
 
-    // Métodos Get
+    // Métodos Get TESTE
     public function getDescricao()
     {
         return $this->descricao;
@@ -64,7 +64,7 @@ class Gastos extends BaseController
     }
 
     // Métodos Adicionais
-    public function calcularGastos() // OK -> Retorna dados corretamente
+    public function calcularGastos() // OK -> Retorna dados corretamente 
     {   
         // Despesas vindas do DB
         $gastos = $this->_model->findAll();
