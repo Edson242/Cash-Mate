@@ -34,7 +34,7 @@ class Gastos extends BaseController
     }
 
     // Métodos Adicionais
-    public function calcularGastos() // OK -> Retorna dados corretamente
+    public function calcularGastos() // OK -> Retorna dados corretamente 
     {   
         // Despesas vindas do DB
         $gastos = $this->_model->findAll();
