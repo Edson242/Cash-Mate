@@ -1,10 +1,4 @@
-<?php if(session()->getFlashdata('errorUpdateDespesa')): ?>
-    <div class="alert alert-danger"><?= session()->getFlashdata('errorUpdateDespesa') ?></div>
-<?php endif;?>
 
-<?php if(session()->getFlashdata('successUpdateDespesa')): ?>
-    <div class="alert alert-success"><?= session()->getFlashdata('successUpdateDespesa') ?></div>
-<?php endif;?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
