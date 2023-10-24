@@ -2,74 +2,54 @@
 
 namespace App\Controllers;
 
-use App\Models\UsuariosModel;
 use App\Services\UserService;
 use CodeIgniter\Config\Factories;
 
 class Usuario extends BaseController
 {
-    protected $_model;
+
+    // Atributos
     protected $userService;
 
     public function __construct()
     {
-        // $_model = new UsuariosModel();
-        $this->userService = Factories::class(UserService::class);
+        $this->userService = Factories::class(UserService::class); // Puxa o UserService
     }
 
     public function index()
     {
-        echo view('login');
+        // Chama a View de login
+        return view('login');
     }
 
     public function register()
-    {
-        echo view('register');
+    {   
+        // Chama a View de registro
+        return view('register');
     }
 
     public function authenticate(){
-       
+        // Variáveis com os dados do usuário
         $email = $this->request->getPost('email');
         $senha = $this->request->getPost('senha');
         
+        // Manda esses dados para o Service realizar a autenticação no DB
         return ($this->userService->authenticate($email, $senha)) ? redirect()->to('/dashboard') : redirect()->back();
     }
 
     public function createUser(){
-
+        // Coleta os dados do usuário para criação dele
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
         $nome = $this->request->getPost('nome');
 
+        // Envia esses dados para o Service criar o usuário
         $this->userService->createUser($nome ,$email, $password);
     }
 
     public function logout(){
+        // Faz o logout destruindo a session e manda para o login novamente
         session()->destroy();
-        return redirect()->to('/');
+        return redirect()->to('/login');
     }
 }
-
-    // public function login()
-    // {
-
-    //     $email = $this->request->getPost('email');
-    //     $senha = $this->request->getPost('senha');
-
-    //     $usuario = $this->_model->buscarPorEmailSenha($email, $senha);
-
-    //     if ($usuario) {
-    //         session()->set('usuario', $usuario);
-    //         return redirect()->to('dashboard');
-    //     } else {
-    //         session()->setFlashdata('error', 'E-mail ou senha inválidos');
-    //         return redirect()->to('login');
-    //     }
-    // }
-
-    // public function logout()
-    // {
-    //     session()->remove('usuario');
-    //     return redirect()->to('login');
-    // }
-//}
