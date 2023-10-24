@@ -37,15 +37,18 @@ class Gastos extends BaseController
     }
     // OK -> Adiciona corretamente no DB
     public function addDespesaView(){
+
         // Pega as despesas para exibir na tela
         $data['gastos'] = $this->_model->findAll();
         $categorias = $this->_modelCategoria->findAll();
         $data['gastos']['categorias'] = $categorias;
         // debug($data);
+
         // Vai para a View de inserir despesas
         return view('inserirDespesa', $data);
     }
     public function addDespesa(){
+
         // Busca os dados do Form e coloca em um array | PASSAR ID USUÁRIO/CATEGORIA COM SESSION!
         $date = [
             'user_id' => 1, 
@@ -64,8 +67,10 @@ class Gastos extends BaseController
             return redirect()->back();
         }
     }
+
     // OK -> Criar direcionamento com o ID da despesa
     public function deletarDespesa($id){
+
         // Deleta despesa passando o ID e fazendo uma verificação
         if($this->_model->delete($id, true)){
             session()->setFlashdata('sucessDeleted', 'Despesa deletada com sucesso!');
@@ -75,12 +80,14 @@ class Gastos extends BaseController
             return redirect()->to('/addDespesa');
         }
     }
+
     // OK -> Setar FlashDatas nas View
     public function updateDespesa($id){
-        // // Pega o ID como paramêtro para buscar a Despesa 
+
+        // Pega o ID como paramêtro para buscar a Despesa 
         // $despesa['despesa'] = $this->_model->where('id', $id)->findAll();
 
-        // // debug($despesa);
+        // debug($despesa);
         // return view('updateDespesa', $despesa);
 
         if($this->request->getMethod() === 'post'){

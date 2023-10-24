@@ -46,7 +46,6 @@
 <header>
         <i id="burguer" class="material-icons" onclick="clickMenu()">menu</i>
         <nav id="menu" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-            <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="">visão geral</a>
@@ -64,7 +63,6 @@
                         <a class="nav-link disabled" href="#">Usuário</a>
                     </li>
                 </ul>
-            <!-- </div>  -->
         </nav>
     </header>
     <main>
