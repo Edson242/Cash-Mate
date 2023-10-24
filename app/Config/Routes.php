@@ -15,7 +15,7 @@ $routes->match(['get', 'post'], '/updateDespesa/(:num)', 'Gastos::updateDespesa/
 $routes->post('/addDespesas', 'Gastos::addDespesa');
 
 // Rotas de usuario
-$routes->post('login', 'Usuario::index');
+$routes->get('login', 'Usuario::index');
 $routes->post('authenticate', 'Usuario::authenticate');
 $routes->get('logout', 'Usuario::logout');
 $routes->get('create', 'Usuario::create');

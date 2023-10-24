@@ -13,7 +13,7 @@ class Usuario extends BaseController
 
     public function __construct()
     {
-        $_model = new UsuariosModel();
+        // $_model = new UsuariosModel();
         $this->userService = Factories::class(UserService::class);
     }
 

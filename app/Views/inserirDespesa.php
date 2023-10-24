@@ -1,7 +1,7 @@
 <?php $this->extend('includes/template'); ?>
 <?php $this->section('content');?>
     <?php foreach ($gastos as $gasto) :?>
-    <button class="btn btn-info shadow rounded"><a href="<?php redirect()->to('/dashboard')?>">Voltar</a></button>
+    <!-- <button class="btn btn-info shadow rounded"><a href="<?php // redirect()->to('/dashboard')?>">Voltar</a></button> -->
     <div class="container form-control input-sm text-center">
         <form action="/addDespesas" method="post">
             <label for="">Valor</label><br>

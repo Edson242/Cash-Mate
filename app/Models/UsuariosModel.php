@@ -12,7 +12,7 @@ class UsuariosModel extends Model
     protected $returnType       = Usuarios::class;
     protected $allowedFields    = ['nome', 'email', 'password'];
 
-    public function getUser($email, $senha)
+    public function getUser($email)
     {
         return $this->where('email', $email)->first();
     }}
