@@ -3,6 +3,7 @@
 <?php endif;?>
 
 <form method="POST" action="/createUser">
+    <input type="text" name="nome" id="nome" />
     <input type="email" name="email" id="email" />
     <input type="password" name="password" id="password" />
     <button type="submit">Criar usuário</button>

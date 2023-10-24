@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\Categorias;
-use App\Models\Despesas;
+use App\Models\CategoriasModel;
+use App\Models\DespesasModel;
 use CodeIgniter\Config\Factories;
 
 class Gastos extends BaseController
@@ -20,16 +20,10 @@ class Gastos extends BaseController
     public $data; // Sem formatação | Aplicar formatação
     public $categoria; // Int -> 
 
-    public function __construct($user_id = null, $categoria_id = null, $descricao = null, $valor = null, $data = null, $categoria = null)
+    public function __construct()
     {
-        $this->_model = new Despesas();
-        $this->_modelCategoria = new Categorias();
-        $this->user_id = $user_id;
-        $this->descricao = $descricao;
-        $this->categoria_id = $categoria_id;
-        $this->valor = $valor;
-        $this->data = $data;
-        $this->categoria = $categoria;
+        $this->_model = new DespesasModel();
+        $this->_modelCategoria = new CategoriasModel();
         $this->userService = Factories::class(UserService::class);
     }
 
@@ -41,15 +35,15 @@ class Gastos extends BaseController
         debug($gastos);
         // return $gastos;
     }
-    // OK -> Adiciona corretamente no DB, porem n retorna resposta na View
+    // OK -> Adiciona corretamente no DB
     public function addDespesaView(){
         // Pega as despesas para exibir na tela
         $data['gastos'] = $this->_model->findAll();
         $categorias = $this->_modelCategoria->findAll();
-        $data['categoria'] = $categorias;
-        debug($data);
+        $data['gastos']['categorias'] = $categorias;
+        // debug($data);
         // Vai para a View de inserir despesas
-        // return view('inserirDespesa', $data);
+        return view('inserirDespesa', $data);
     }
     public function addDespesa(){
         // Busca os dados do Form e coloca em um array | PASSAR ID USUÁRIO/CATEGORIA COM SESSION!

@@ -1,76 +1,75 @@
 <?php
 
-class Usuario extends Pessoas
+namespace App\Controllers;
+
+use App\Models\UsuariosModel;
+use App\Services\UserService;
+use CodeIgniter\Config\Factories;
+
+class Usuario extends BaseController
 {
-    private $email;
-    private $senha;
-    private $tipo;
+    protected $_model;
+    protected $userService;
 
-
-    public function __construct($email, $senha, $tipo)
+    public function __construct()
     {
-        $this->email = $email;
-        $this->senha = $senha;
-        $this->tipo = $tipo;
+        $_model = new UsuariosModel();
+        $this->userService = Factories::class(UserService::class);
     }
 
-    public function getNome()
+    public function index()
     {
-        return $this->email;
+        echo view('login');
     }
 
-    public function setNome($email)
+    public function register()
     {
-        $this->email = $email;
+        echo view('register');
     }
 
-    public function getEndereco()
-    {
-        return $this->senha;
+    public function authenticate(){
+       
+        $email = $this->request->getPost('email');
+        $senha = $this->request->getPost('senha');
+        
+        return ($this->userService->authenticate($email, $senha)) ? redirect()->to('/dashboard') : redirect()->back();
     }
 
-    public function setEndereco($senha)
-    {
-        $this->senha = $senha;
+    public function createUser(){
+
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+        $nome = $this->request->getPost('nome');
+
+        $this->userService->createUser($nome ,$email, $password);
     }
 
-    public function getBairro()
-    {
-        return $this->tipo;
-    }
-
-    public function setBairro($tipo)
-    {
-        $this->tipo = $tipo;
-    }
-
-
-    //Em andamento 
-    public function arterarSenha($senhaNova)
-    {
-
-        return $this->senha === $senhaNova;
-    }
-
-    //Em andamento
-    public function verificarSenha($senha)
-    {
-
-        return $this->senha === $senha;
-    }
-
-
-    //Em andamento
-    public function arterarEmail($emailNova)
-    {
-
-        return $this->email === $emailNova;
-    }
-
-    //Em andamento
-    public function verificarEmail($email)
-    {
-
-        return $this->email === $email;
+    public function logout(){
+        session()->destroy();
+        return redirect()->to('/');
     }
 }
+
+    // public function login()
+    // {
+
+    //     $email = $this->request->getPost('email');
+    //     $senha = $this->request->getPost('senha');
+
+    //     $usuario = $this->_model->buscarPorEmailSenha($email, $senha);
+
+    //     if ($usuario) {
+    //         session()->set('usuario', $usuario);
+    //         return redirect()->to('dashboard');
+    //     } else {
+    //         session()->setFlashdata('error', 'E-mail ou senha inválidos');
+    //         return redirect()->to('login');
+    //     }
+    // }
+
+    // public function logout()
+    // {
+    //     session()->remove('usuario');
+    //     return redirect()->to('login');
+    // }
+//}

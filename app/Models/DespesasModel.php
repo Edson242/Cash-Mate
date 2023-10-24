@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Entities\Gastos;
 use CodeIgniter\Model;
 
-class Despesas extends Model
+class DespesasModel extends Model
 {
     protected $table            = 'despesas';
+    protected $returnType       = Gastos::class;
     protected $allowedFields    = ['user_id', 'categoria_id', 'valor', 'data', 'descricao'];
     protected $validationRules = [
         'valor' => 'required',
