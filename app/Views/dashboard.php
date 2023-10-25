@@ -1,4 +1,5 @@
 <?php $this->extend('includes/template'); ?>
 <?php $this->section('content');?>
-<h1>Dashboard</h1>
+<?php $dadosUser = session()->get('variavalDeSessao');?>
+<h1>Bem vindo <?php echo $dadosUser;?></h1>
 <?php $this->endSection();?>

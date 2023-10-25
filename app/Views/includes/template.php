@@ -48,7 +48,7 @@
         <nav id="menu" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="">visão geral</a>
+                        <a class="nav-link" href="/dashboard">visão geral</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/addDespesa">lançamentos</a>
@@ -65,14 +65,15 @@
                 </ul>
         </nav>
     </header>
-    <main>
-          <?php 
-        $this->renderSection('content');  
-    ?>
-        </main>
-        <footer>
 
-</footer>
+    <main>
+        <?php 
+        $this->renderSection('content');  
+        ?>
+    </main>
+
+    <footer>
+    </footer>
 <script>
     function clickMenu() {
         if(menu.style.display == 'block') {

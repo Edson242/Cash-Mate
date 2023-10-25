@@ -24,13 +24,13 @@ class UserService{
         if($user && password_verify($senha, $user->password)){
             
             // Cria uma variável que vaie estar em uma session para futuras utilizações
-            $variavalDeSessao = [
+            $variavelDeSessao = [
                 'email' => $user->email,
                 'isLoggedIn' => true
             ];
             
             // Coloca a variável dentro da session
-            session()->set($variavalDeSessao);
+            session()->set($variavelDeSessao);
 
             // Flashdata para exibir nas Views
             session()->setFlashdata('success', 'Usuário logado com Sucesso!');
@@ -56,7 +56,7 @@ class UserService{
 
             // Flashdata para exibir nas Views 
             session()->setFlashdata('success', 'Usuário criado com sucesso!');
-            return redirect()->to('/');
+            return redirect()->to('/login');
         } else{
             return redirect()->back()->withInput()->with('errors', $this->userModel->errors()); 
         }

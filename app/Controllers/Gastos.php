@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\CategoriasModel;
 use App\Models\DespesasModel;
+use App\Services\GastoService;
 use CodeIgniter\Config\Factories;
 
 class Gastos extends BaseController
@@ -12,7 +13,7 @@ class Gastos extends BaseController
     // Atributos
     protected $_model;
     protected $_modelCategoria;
-    private $userService;
+    private $gastosService;
     public $user_id;
     public $categoria_id;
     public $descricao; 
@@ -24,7 +25,7 @@ class Gastos extends BaseController
     {
         $this->_model = new DespesasModel();
         $this->_modelCategoria = new CategoriasModel();
-        $this->userService = Factories::class(UserService::class);
+        $this->gastosService = Factories::class(GastoService::class);
     }
 
     // Métodos Adicionais
@@ -35,6 +36,7 @@ class Gastos extends BaseController
         debug($gastos);
         // return $gastos;
     }
+
     // OK -> Adiciona corretamente no DB
     public function addDespesaView(){
 
@@ -42,11 +44,11 @@ class Gastos extends BaseController
         $data['gastos'] = $this->_model->findAll();
         $categorias = $this->_modelCategoria->findAll();
         $data['gastos']['categorias'] = $categorias;
-        // debug($data);
 
         // Vai para a View de inserir despesas
         return view('inserirDespesa', $data);
     }
+
     public function addDespesa(){
 
         // Busca os dados do Form e coloca em um array | PASSAR ID USUÁRIO/CATEGORIA COM SESSION!
@@ -57,15 +59,8 @@ class Gastos extends BaseController
             'data' => $this->request->getPost('data'),
             'descricao' => $this->request->getPost('descricao') 
         ];
-
-        // Inseri e faz uma verificação para saber se adicionou de fato a despesa
-        if($this->_model->insert($date)){
-            session()->setFlashdata('success', 'Despesas inserida com sucesso!');
-            return redirect()->back();
-        } else {
-            session()->setFlashdata('error', 'Erro ao inserir despesa!');
-            return redirect()->back();
-        }
+        
+        $this->gastosService->inserirDespesaInDB($date);
     }
 
     // OK -> Criar direcionamento com o ID da despesa
@@ -101,14 +96,10 @@ class Gastos extends BaseController
                 'data' => $this->request->getPost('data'),
                 'descricao' => $this->request->getPost('descricao')
             ];
-            // Verifica se deu certo o update e seta as Flash Data
-            if($this->_model->update($id, $data)){
-                session()->setFlashdata('successUpdate', 'Despesa alterada com sucesso!');
-                return redirect()->to('/addDespesa');
-            }else{
-                session()->setFlashdata('errorUpdate', 'Erro ao alterar a despesa!');
-                return redirect()->to('/addDespesa');
-            }
+            
+            // Manda os dados para o Service fazer update no DB
+            $this->gastosService->updateDespesasInDB($id, $data);
+
            // Chama a View e passa os dados da despesa escolhida
         } else{
             $data['despesa'] = $this->_model->where('id', $id)->findAll();
