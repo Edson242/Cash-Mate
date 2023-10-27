@@ -32,7 +32,7 @@
             <?php 
                     // print_r("<tr>");
                     // print_r("<td>" . $gastos->descricao . "</td>");
-                    debug($gastos->id);
+                    // debug($gastos->id);
                     // print_r("<td>" . pila($gasto->valor) . "</td>");
                     // print_r("<td>" . br2bd($gasto->data) . "</td>");
                     // // print_r("<td>" . $gasto['categorias']['nome'] . "</td>");

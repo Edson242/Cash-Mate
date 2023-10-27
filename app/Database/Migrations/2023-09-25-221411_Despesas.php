@@ -42,8 +42,8 @@ class Despesas extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('user_id', 'usuarios', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('categoria_id', 'categorias', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('user_id', 'usuarios', 'id');
+        $this->forge->addForeignKey('categoria_id', 'categorias', 'id');
         $this->forge->createTable('despesas');
     }
 

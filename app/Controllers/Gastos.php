@@ -41,9 +41,9 @@ class Gastos extends BaseController
     public function addDespesaView(){
 
         // Pega as despesas para exibir na tela
-        $data['gastos'] = $this->_model->findAll();
-        $categorias = $this->_modelCategoria->findAll();
-        $data['gastos']['categorias'] = $categorias;
+        $data['gastos'] = $this->gastosService->findAllGastos();
+        // $categorias = $this->_modelCategoria->findAll();
+        // $data['categorias'] = $categorias;
 
         // Vai para a View de inserir despesas
         return view('inserirDespesa', $data);
@@ -53,7 +53,7 @@ class Gastos extends BaseController
 
         // Busca os dados do Form e coloca em um array | PASSAR ID USUÁRIO/CATEGORIA COM SESSION!
         $date = [
-            'user_id' => 1, 
+            'user_id' => 1,
             'categoria_id' => 1,
             'valor' => $this->request->getPost('valor'),
             'data' => $this->request->getPost('data'),

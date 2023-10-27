@@ -37,4 +37,8 @@ class GastoService {
             return redirect()->to('/addDespesa');
         }
     }
+
+    public function findAllGastos(){
+        return $this->gastoModel->findAll();
+    }
 }

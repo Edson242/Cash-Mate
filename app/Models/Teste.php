@@ -2,20 +2,18 @@
 
 namespace App\Models;
 
-use App\Entities\Gastos;
 use CodeIgniter\Model;
 
-class DespesasModel extends Model
+class Teste extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'despesas';
+    protected $table            = 'testes';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
+    protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $returnType       = Gastos::class;
-    protected $allowedFields    = ['user_id', 'categoria_id', 'valor', 'data', 'descricao'];
-
+    protected $allowedFields    = [];
 
     // Dates
     protected $useTimestamps = false;
@@ -25,11 +23,7 @@ class DespesasModel extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules = [
-        'valor' => 'required',
-        'data' => 'required',
-        'descricao' => 'required|min_length[5]|max_length[100]'
-    ];
+    protected $validationRules      = [];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

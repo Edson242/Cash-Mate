@@ -28,7 +28,7 @@ class Categorias extends Migration
             ]
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('usuarios_id', 'usuarios', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('usuarios_id', 'usuarios', 'id');
         $this->forge->createTable('categorias');
     }
 
