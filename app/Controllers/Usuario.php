@@ -34,7 +34,8 @@ class Usuario extends BaseController
         $senha = $this->request->getPost('senha');
         
         // Manda esses dados para o Service realizar a autenticação no DB
-        return ($this->userService->authenticate($email, $senha)) ? redirect()->to('/dashboard') : redirect()->back();
+        // return ($this->userService->authenticate($email, $senha)) ? redirect()->to('/dashboard') : redirect()->back();
+        return ($this->userService->authenticate($email, $senha));
     }
 
     public function createUser(){

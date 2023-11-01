@@ -19,26 +19,41 @@ class UserService{
     public function authenticate($email, $senha){
         // Pega o nome do usuário e autentica no DB
         $user = $this->userModel->getUser($email);
+        $dados = $this->userModel->where('email', $email)->findAll();
+        foreach ($dados as $dado):
+            $id = $dado->id;
+        endforeach;
         
-        // Verifica se a senha passada pelo o usuário corresponde
-        if($user && password_verify($senha, $user->password)){
-            
-            // Cria uma variável que vaie estar em uma session para futuras utilizações
-            $variavelDeSessao = [
-                'email' => $user->email,
-                'isLoggedIn' => true
-            ];
-            
-            // Coloca a variável dentro da session
-            session()->set($variavelDeSessao);
+        $variavelDeSessao = [
+                    'id' => $id,
+                    'email' => $user->email,
+                    'isLoggedIn' => true
+                ];
+                
+        // Coloca a variável dentro da session
+        session()->set('variavelDeSessao', $variavelDeSessao);
+        debug(session()->get('variavelDeSessao'));
 
-            // Flashdata para exibir nas Views
-            session()->setFlashdata('success', 'Usuário logado com Sucesso!');
-            return true;
-        } else{
-            session()->setFlashdata('error', 'Erro ao tentar logar!');
-            return false;
-        }
+        // Verifica se a senha passada pelo o usuário corresponde
+        // if($user && password_verify($senha, $user->password)){
+            
+        //     // Cria uma variável que vaie estar em uma session para futuras utilizações
+        //     $variavelDeSessao = [
+        //         'id' => $id,
+        //         'email' => $user->email,
+        //         'isLoggedIn' => true
+        //     ];
+            
+        //     // Coloca a variável dentro da session
+        //     session()->set($variavelDeSessao);
+
+        //     // Flashdata para exibir nas Views
+        //     session()->setFlashdata('success', 'Usuário logado com Sucesso!');
+        //     return true;
+        // } else{
+        //     session()->setFlashdata('error', 'Erro ao tentar logar!');
+        //     return false;
+        // }
     }
 
     public function createUser($nome, $email, $password){

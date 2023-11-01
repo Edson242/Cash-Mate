@@ -10,13 +10,13 @@
 <body>
     <div class="container form-control input-sm">
     <?php foreach ($despesa as $despesas) :?>
-        <form action="<?php base_url('updateDespesa/') . $despesas['id']?>" method="post">
+        <form action="<?php base_url('updateDespesa/') . $despesas->id?>" method="post">
             <label for="">Valor</label><br>
-            <input class=""  type="number" name="valor" id="valor" value="<?= $despesas['valor']; ?>"><br>
+            <input class=""  type="number" name="valor" id="valor" value="<?= $despesas->valor; ?>"><br>
             <label for="">Data</label><br>
-            <input type="date" name="data" id="data" value="<?= $despesas['data']; ?>"><br>
+            <input type="date" name="data" id="data" value="<?= $despesas->data; ?>"><br>
             <label for="">Descrição</label><br>
-            <input type="text" name="descricao" id="descricao" value="<?= $despesas['descricao']; ?>"><br><br>
+            <input type="text" name="descricao" id="descricao" value="<?= $despesas->descricao; ?>"><br><br>
             <input type="submit" class="btn btn-success shadow rounded" value="Enviar">
         </form>
     <?php endforeach; ?>

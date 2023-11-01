@@ -19,6 +19,11 @@
             --fonte01: 'Oswald', sans-serif;
         } */
 
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
         @media screen and (min-width: 768px) {
             #burguer {
                 display: none;

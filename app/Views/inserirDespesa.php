@@ -15,7 +15,7 @@
     </div>
 
     <div class="despesas">
-        <?php //foreach ($gastos as $gasto) :?>
+        
            <?php
                 //echo "<pre>";  
                 //print_r($gasto) ?>
@@ -28,18 +28,17 @@
             <th>Categoria</th>
             <th>Ações</th>
         </tr>
-        <tr>
+        <tr><?php foreach ($gastos as $gasto) :?>
             <?php 
-                    // print_r("<tr>");
-                    // print_r("<td>" . $gastos->descricao . "</td>");
-                    // debug($gastos->id);
-                    // print_r("<td>" . pila($gasto->valor) . "</td>");
-                    // print_r("<td>" . br2bd($gasto->data) . "</td>");
-                    // // print_r("<td>" . $gasto['categorias']['nome'] . "</td>");
-                    // echo "<td><button><a href='" . base_url('deletarDespesa/') . $gasto->id . "'>Deletar</a></button>";
-                    // echo "<td><button><a href='" . base_url('updateDespesa/') . $gasto->id . "'>Editar</a></button>";
-                    // echo "</tr>";
-                //endforeach;?>
+                    print_r("<tr>");
+                    print_r("<td>" . $gasto->descricao . "</td>");
+                    print_r("<td>" . pila($gasto->valor) . "</td>");
+                    print_r("<td>" . br2bd($gasto->data) . "</td>");
+                    print_r("<td>" . $gasto->nome . "</td>");
+                    echo "<td><button><a href='" . base_url('deletarDespesa/') . $gasto->id . "'>Deletar</a></button>";
+                    echo "<td><button><a href='" . base_url('updateDespesa/') . $gasto->id . "'>Editar</a></button>";
+                    echo "</tr>";
+                endforeach;?>
         </tr>
     </div>
     <?php $this->endSection();?>
