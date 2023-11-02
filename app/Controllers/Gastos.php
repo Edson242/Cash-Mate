@@ -40,13 +40,14 @@ class Gastos extends BaseController
     // OK -> Adiciona corretamente no DB
     public function addDespesaView(){
 
-        // session()->get('variavelDeSessao');
-        debug(session()->get('variavelDeSessao'));
+        $dados = session()->get('variavelDeSessao');
+        $id = $dados['id'];
         // Pega as despesas para exibir na tela
-        $data['gastos'] = $this->gastosService->findAllGastos();
+        $data['gastos'] = $this->gastosService->findAllGastos($id);
+        // debug($data);
         // $data['categorias'] = $this->gastosService->findCategorias();
 
-        // debug($this->gastosService->findCategorias());
+        debug($this->gastosService->findCategorias($id));
         // Vai para a View de inserir despesas
         // return view('inserirDespesa', $data);
     }

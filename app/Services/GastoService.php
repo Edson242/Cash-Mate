@@ -41,8 +41,8 @@ class GastoService {
         }
     }
 
-    public function findAllGastos(){
-        return $this->gastoModel->findAll();
+    public function findAllGastos($id){
+        return $this->gastoModel->where('user_id', $id)->findAll();
     }
 
     public function findCategorias($id){
