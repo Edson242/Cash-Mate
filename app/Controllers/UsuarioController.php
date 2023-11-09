@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Services\UserService;
 use CodeIgniter\Config\Factories;
 
-class Usuario extends BaseController
+class UsuarioController extends BaseController
 {
 
     // Atributos
@@ -26,6 +26,12 @@ class Usuario extends BaseController
     {   
         // Chama a View de registro
         return view('register');
+    }
+
+    public function viewUser()
+    {   
+        // Chama a View de Usuário
+        return view('usuario');
     }
 
     public function authenticate(){
@@ -52,5 +58,21 @@ class Usuario extends BaseController
         // Faz o logout destruindo a session e manda para o login novamente
         session()->destroy();
         return redirect()->to('/login');
+    }
+
+    public function alterarDados(){
+        // Array de dados
+        $dados = [
+            'email' => $this->request->getPost('email'),
+            'senha' => $this->request->getPost('senha')
+        ];
+        $senha = $dados['senha'];
+        echo $senha;
+
+        $newHash = password_hash($senha, PASSWORD_DEFAULT);
+        
+        $dados['senha'] = $newHash;
+
+        debug($dados);
     }
 }

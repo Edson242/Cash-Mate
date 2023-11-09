@@ -59,13 +59,13 @@
                         <a class="nav-link" href="/addDespesa">lançamentos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">relatórios</a>
+                        <a class="nav-link" href="/relatorio">relatórios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">config</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Usuário</a>
+                        <a class="nav-link" href="/usuario">Usuário</a>
                     </li>
                 </ul>
         </nav>

@@ -22,11 +22,13 @@ class UserService{
         $dados = $this->userModel->where('email', $email)->findAll();
         foreach ($dados as $dado):
             $id = $dado->id;
+            $nome = $dado->nome;
         endforeach;
         
         $variavelDeSessao = [
                     'id' => $id,
                     'email' => $user->email,
+                    'nome' => $nome,
                     'isLoggedIn' => true
                 ];
                 

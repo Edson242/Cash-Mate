@@ -46,19 +46,8 @@ class GastoService {
     }
 
     public function findCategorias($id){
-
         // Busca todas as categorias no DB
-        $categorias = $this->categoriaModel->where('usuarios_id', $id)->findAll();
-        $categoriaId = array();
-
-        // Coloca o ID como Key e o nome como Valor
-        foreach ($categorias as $categoria) {
-            $categoriaId[$categoria->id] = $categoria->nome;
-        }
-        return $categoriaId;
-
-        $despesas = $this->gastoModel->where('id', $id)->findAll();
-
+        return $this->categoriaModel->where('usuarios_id', $id)->findAll();
     }    
     
 }

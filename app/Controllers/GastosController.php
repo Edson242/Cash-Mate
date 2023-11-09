@@ -8,7 +8,7 @@ use App\Models\DespesasModel;
 use App\Services\GastoService;
 use CodeIgniter\Config\Factories;
 
-class Gastos extends BaseController
+class GastosController extends BaseController
 {
     // Atributos
     protected $_model;
@@ -37,6 +37,10 @@ class Gastos extends BaseController
         // return $gastos;
     }
 
+    public function viewRelatorio(){
+        return view('relatorio');
+    }
+
     // OK -> Adiciona corretamente no DB
     public function addDespesaView(){
 
@@ -45,24 +49,30 @@ class Gastos extends BaseController
         // Pega as despesas para exibir na tela
         $data['gastos'] = $this->gastosService->findAllGastos($id);
         // debug($data);
-        // $data['categorias'] = $this->gastosService->findCategorias();
-
-        debug($this->gastosService->findCategorias($id));
+        $data['categorias'] = $this->gastosService->findCategorias($id);
+        // $cat = $data['categorias'];
+        // foreach ($cat as $cats):
+        //     debug($cats->nome);
+        // endforeach;
         // Vai para a View de inserir despesas
-        // return view('inserirDespesa', $data);
+        return view('inserirDespesa', $data);
     }
 
     public function addDespesa(){
 
+
+        $dados = session()->get('variavelDeSessao');
+        $id = $dados['id'];
         // Busca os dados do Form e coloca em um array | PASSAR ID USUÁRIO/CATEGORIA COM SESSION!
         $date = [
-            'user_id' => 1,
-            'categoria_id' => 1,
+            'user_id' => $id,
+            'categoria_id' => $this->request->getPost('categoria'),
             'valor' => $this->request->getPost('valor'),
             'data' => $this->request->getPost('data'),
             'descricao' => $this->request->getPost('descricao') 
         ];
         
+        // debug($date);
         $this->gastosService->inserirDespesaInDB($date);
     }
 

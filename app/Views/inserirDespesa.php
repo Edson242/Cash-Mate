@@ -1,6 +1,5 @@
 <?php $this->extend('includes/template'); ?>
 <?php $this->section('content');?>
-    <?php //foreach ($gastos as $gasto) :?>
     <!-- <button class="btn btn-info shadow rounded"><a href="<?php // redirect()->to('/dashboard')?>">Voltar</a></button> -->
     <div class="container form-control input-sm text-center">
         <form action="/addDespesas" method="post">
@@ -8,6 +7,11 @@
             <input type="number" name="valor" id="valor" placeholder="25" required><br>
             <label for="">Data</label><br>
             <input type="date" name="data" id="data" required><br>
+            <label for="">Categoria</label><br>
+            <?php $categorias = buscarCat();
+            foreach ($categorias as $cat) :?>
+                <input type="radio" name="categoria" id="categoria" value="<?php echo $cat->id;?>" required><label for=""><?php echo $cat->nome; ?></label><br>
+            <?php endforeach;?>
             <label for="">Descrição</label><br>
             <input type="text" name="descricao" id="descricao" placeholder="Lanche" required><br><br>
             <input type="submit" class="btn btn-success shadow rounded" value="Enviar">
@@ -30,11 +34,14 @@
         </tr>
         <tr><?php foreach ($gastos as $gasto) :?>
             <?php 
+                    // echo "<pre>";
+                    // print_r($gasto);
                     print_r("<tr>");
                     print_r("<td>" . $gasto->descricao . "</td>");
                     print_r("<td>" . pila($gasto->valor) . "</td>");
                     print_r("<td>" . br2bd($gasto->data) . "</td>");
-                    print_r("<td>" . $gasto->nome . "</td>");
+                    // print_r("<td>" . categoria($gasto->categoria) . "</td>");
+                    print_r("<td>" . categoria($gasto->categoria_id) . "</td>");
                     echo "<td><button><a href='" . base_url('deletarDespesa/') . $gasto->id . "'>Deletar</a></button>";
                     echo "<td><button><a href='" . base_url('updateDespesa/') . $gasto->id . "'>Editar</a></button>";
                     echo "</tr>";
