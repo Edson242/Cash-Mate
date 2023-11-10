@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Services\UserService;
+use App\Models\UsuariosModel;
 use CodeIgniter\Config\Factories;
 
 class UsuarioController extends BaseController
@@ -10,10 +11,12 @@ class UsuarioController extends BaseController
 
     // Atributos
     protected $userService;
+    protected $userModel;
 
     public function __construct()
     {
         $this->userService = Factories::class(UserService::class); // Puxa o UserService
+        $this->userModel = Factories::models(UsuariosModel::class); // Puxa o Model
     }
 
     public function index()
@@ -61,18 +64,38 @@ class UsuarioController extends BaseController
     }
 
     public function alterarDados(){
-        // Array de dados
-        $dados = [
-            'email' => $this->request->getPost('email'),
-            'senha' => $this->request->getPost('senha')
-        ];
-        $senha = $dados['senha'];
-        echo $senha;
-
-        $newHash = password_hash($senha, PASSWORD_DEFAULT);
+        // Obter os dados do formulário
+        $email = $this->request->getPost('email');
+        $senha = $this->request->getPost('senha1');
+        $confirmSenha = $this->request->getPost('senha2');
+    
+        // Verifica se a senha e a confirmação da senha coincidem
+        if($senha === $confirmSenha) {
+            // Cria o novo Hash
+            $newHash = password_hash($senha, PASSWORD_DEFAULT);
         
-        $dados['senha'] = $newHash;
-
-        debug($dados);
+            // Obter os dados do usuário da sessão
+            $dado = session()->get('variavelDeSessao');
+            $nome = $dado['nome'];
+        
+            // Dados a serem atualizados
+            $dados = [
+                'email' => $email,
+                'password' => $newHash,
+                'nome' => $nome
+            ];
+        
+            // Verificar se a atualização foi bem-sucedida
+            if ($this->userModel->update($dado['id'], $dados)) {
+                session()->setFlashdata('successUpdateUser', 'Dados de usuário alterados com sucesso!');
+                return redirect()->to('/usuario');
+            } else {
+                session()->setFlashdata('errorUpdateUser', 'Erro ao alterar os dados de usuário!');
+                return redirect()->to('/usuario');
+            }    
+        } else {
+            session()->setFlashdata('errorSenhaUser', 'Senha não coincidem!');
+                return redirect()->to('/usuario');
+        }
     }
 }

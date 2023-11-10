@@ -17,7 +17,9 @@
         <label for="">Email:</label>
         <input type="email" name="email" id="email" value="<?php print_r($dados['email'])?>">
         <label for="">Senha:</label>
-        <input type="password" name="senha" id="senha">
+        <input type="password" name="senha1" id="senha1">
+        <label for="">Confirmar Senha:</label>
+        <input type="password" name="senha2" id="senha2">
         <input type="submit" value="Alterar">
     </form>
     <?php $this->endSection();?>

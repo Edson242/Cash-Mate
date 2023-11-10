@@ -3,6 +3,7 @@
 // Função de Debug
 
 use App\Models\CategoriasModel;
+use App\Services\GastoService;
 
 if(!function_exists('debug')){
     function debug($param){
@@ -38,5 +39,20 @@ if(!function_exists('buscarCat()')){
         $id = $dados['id'];
         $_model = new CategoriasModel();
         return $_model->where('usuarios_id', $id)->findAll();
+    }
+}
+if(!function_exists('dadosRelatorio()')){
+    
+    function dadosRelatorio(){
+        $gastosService = new GastoService;
+        
+        $dados = session()->get('variavelDeSessao');
+        $id = $dados['id'];
+        // Pega as despesas para exibir na tela
+        $data = $gastosService->findAllGastos($id);
+        // debug($data);
+        $data['categorias'] = $gastosService->findCategorias($id);
+        return $data;
+        // return view('relatorioView', $data);
     }
 }

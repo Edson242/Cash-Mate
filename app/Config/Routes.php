@@ -11,9 +11,9 @@ $routes->get('/gastos', 'GastosController::calcularGastos');
 $routes->get('/addDespesa', 'GastosController::addDespesaView');
 $routes->get('/deletarDespesa/(:num)', 'GastosController::deletarDespesa/$1');
 $routes->match(['get', 'post'], '/updateDespesa/(:num)', 'GastosController::updateDespesa/$1');
-// $routes->match(['get', 'post'], '/login', 'Usuario::index');
 $routes->post('/addDespesas', 'GastosController::addDespesa');
 $routes->get('relatorio', 'GastosController::viewRelatorio');
+$routes->get('gerarRelatorio', 'GastosController::gerarPDF');
 
 // Rotas de usuario
 $routes->get('login', 'UsuarioController::index');

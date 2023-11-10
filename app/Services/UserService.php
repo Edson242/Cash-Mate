@@ -43,6 +43,7 @@ class UserService{
             $variavelDeSessao = [
                 'id' => $id,
                 'email' => $user->email,
+                'nome' => $user->nome,
                 'isLoggedIn' => true
             ];
             

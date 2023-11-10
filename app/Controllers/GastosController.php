@@ -7,6 +7,7 @@ use App\Models\CategoriasModel;
 use App\Models\DespesasModel;
 use App\Services\GastoService;
 use CodeIgniter\Config\Factories;
+use Dompdf\Dompdf;
 
 class GastosController extends BaseController
 {
@@ -38,7 +39,13 @@ class GastosController extends BaseController
     }
 
     public function viewRelatorio(){
-        return view('relatorio');
+        $dados = session()->get('variavelDeSessao');
+        $id = $dados['id'];
+        // Pega as despesas para exibir na tela
+        $data['gastos'] = $this->gastosService->findAllGastos($id);
+        $data['categorias'] = $this->gastosService->findCategorias($id);
+
+        return view('relatorio', $data);
     }
 
     // OK -> Adiciona corretamente no DB
@@ -119,5 +126,26 @@ class GastosController extends BaseController
             return view('updateDespesa', $data);
         }
     }
+
+    // Geração de Relatórios
+    public function gerarPDF() {
+        
+        // $dados = session()->get('variavelDeSessao');
+        // $id = $dados['id'];
+        // // Pega as despesas para exibir na tela
+        // $data['gastos'] = $this->gastosService->findAllGastos($id);
+        // // debug($data);
+        // $data['categorias'] = $this->gastosService->findCategorias($id);
+
+        return view('relatorioView');
+    
+        // $dompdf = new \Dompdf\Dompdf(); 
+
+        // $dompdf->loadHtml(view('relatorioView'));
+        // $dompdf->setPaper('A4', 'landscape');
+        // $dompdf->render();
+        // $dompdf->stream('relatorio.pdf');
+    }
+    
 
 }
