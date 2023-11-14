@@ -17,10 +17,23 @@
             <input type="date" name="data" id="data" value="<?= $despesas->data; ?>"><br>
             <label for="">Descrição</label><br>
             <input type="text" name="descricao" id="descricao" value="<?= $despesas->descricao; ?>"><br><br>
-            <input type="submit" class="btn btn-success shadow rounded" value="Enviar">
+            <input type="submit" class="btn btn-success shadow rounded" value="Enviar" onclick="confirmarEdit()">
         </form>
     <?php endforeach; ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        function confirmarEdit(){
+                // Exibe um diálogo de confirmação
+                if (confirm("Tem certeza que deseja editar este item?")) {
+                    // Se o usuário clicar em "OK", redireciona para o controlador para excluir o item
+                    <?php foreach ($despesa as $despesas) :?>
+                        window.location.href = "<?php echo base_url('deletarDespesa/') . $despesas->id;?>";
+                    <?php endforeach;?>
+                } else {
+                    // Se o usuário clicar em "Cancelar", não faz nada
+                }
+            }
+    </script>
 </body>
 </html>

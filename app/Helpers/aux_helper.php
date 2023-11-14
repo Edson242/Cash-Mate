@@ -3,6 +3,7 @@
 // Função de Debug
 
 use App\Models\CategoriasModel;
+use App\Models\DespesasModel;
 use App\Services\GastoService;
 
 if(!function_exists('debug')){
@@ -54,5 +55,24 @@ if(!function_exists('dadosRelatorio()')){
         $data['categorias'] = $gastosService->findCategorias($id);
         return $data;
         // return view('relatorioView', $data);
+    }
+
+}
+if(!function_exists('calcularGastos()')){
+    
+    function calcularGastos(){
+
+        $dados = session()->get('variavelDeSessao');
+        $id = $dados['id'];
+
+        // Despesas vindas do DB
+        $_model = new DespesasModel();
+        $gastos = $_model->selectSum('valor')->where('user_id', $id)->findAll();
+        // debug($gastos);]
+        foreach($gastos as $gasto):
+            $dados = $gasto->valor;
+        endforeach;
+
+        return pila($dados);
     }
 }

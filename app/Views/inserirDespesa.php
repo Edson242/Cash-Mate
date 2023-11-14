@@ -2,7 +2,7 @@
 <?php $this->section('content');?>
     <!-- <button class="btn btn-info shadow rounded"><a href="<?php // redirect()->to('/dashboard')?>">Voltar</a></button> -->
     <div class="container form-control input-sm text-center">
-        <form action="/addDespesas" method="post">
+        <form action="/addDespesa" method="post">
             <label for="">Valor</label><br>
             <input type="number" name="valor" id="valor" placeholder="25" required><br>
             <label for="">Data</label><br>
@@ -18,34 +18,28 @@
         </form>
     </div>
 
-    <div class="despesas">
-        
-           <?php
-                //echo "<pre>";  
-                //print_r($gasto) ?>
-        <?php // endforeach; ?>
-        <table id="tabela">
-        <tr>
-            <th class="descricao">Descrição</th>
-            <th>Valor</th>
-            <th>Data</th>
-            <th>Categoria</th>
-            <th>Ações</th>
-        </tr>
-        <tr><?php foreach ($gastos as $gasto) :?>
+    <div class="container form-control input-sm text-center">
+        <form action="/addCat" method="post">
+            <label for="">Nome</label><br>
             <?php 
-                    // echo "<pre>";
-                    // print_r($gasto);
-                    print_r("<tr>");
-                    print_r("<td>" . $gasto->descricao . "</td>");
-                    print_r("<td>" . pila($gasto->valor) . "</td>");
-                    print_r("<td>" . br2bd($gasto->data) . "</td>");
-                    // print_r("<td>" . categoria($gasto->categoria) . "</td>");
-                    print_r("<td>" . categoria($gasto->categoria_id) . "</td>");
-                    echo "<td><button><a href='" . base_url('deletarDespesa/') . $gasto->id . "'>Deletar</a></button>";
-                    echo "<td><button><a href='" . base_url('updateDespesa/') . $gasto->id . "'>Editar</a></button>";
-                    echo "</tr>";
-                endforeach;?>
-        </tr>
+                foreach ($categorias as $cat) :?>
+                    <label><?php echo $cat->nome; ?></label><button><a onclick="confirmarDelCat()">Deletar</a></button> <br>
+                <?php endforeach;?>
+            <input type="text" name="Nome" id="Nome" placeholder="Ex. Alimentação" required><br><br>
+            <input type="submit" class="btn btn-success shadow rounded" value="Enviar">
+        </form>
     </div>
+    <script>
+        function confirmarDelCat(){
+                // Exibe um diálogo de confirmação
+                if (confirm("Tem certeza que deseja excluir este item?")) {
+                    // Se o usuário clicar em "OK", redireciona para o controlador para excluir o item
+                    <?php foreach ($categorias as $cat) :?>
+                        window.location.href = "<?php echo base_url('deletarCat/') . $cat->id;?>";
+                    <?php endforeach;?>
+                } else {
+                    // Se o usuário clicar em "Cancelar", não faz nada
+                }
+            }
+    </script>
     <?php $this->endSection();?>

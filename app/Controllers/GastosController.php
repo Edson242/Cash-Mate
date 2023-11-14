@@ -29,15 +29,6 @@ class GastosController extends BaseController
         $this->gastosService = Factories::class(GastoService::class);
     }
 
-    // Métodos Adicionais
-    public function calcularGastos() // OK -> Retorna dados corretamente 
-    {   
-        // Despesas vindas do DB
-        $gastos = $this->_model->findAll();
-        debug($gastos);
-        // return $gastos;
-    }
-
     public function viewRelatorio(){
         $dados = session()->get('variavelDeSessao');
         $id = $dados['id'];
@@ -65,11 +56,29 @@ class GastosController extends BaseController
         return view('inserirDespesa', $data);
     }
 
+    public function addCat(){
+
+            $dados = session()->get('variavelDeSessao');
+            $id = $dados['id'];
+
+            // $validation = \Config\Services::validation();
+
+            // $validation->setRules($this->validationRules);
+            // Pega cada valor necessário para alterar no DB
+            $data = [
+                'nome' => $this->request->getPost('Nome'),
+                'usuarios_id' => $id,
+            ];
+            
+            // Manda os dados para o Service fazer update no DB
+            $this->gastosService->addCategoria($data) ? redirect()->to('/dashboard') : redirect()->to('/dashboard') ;
+    }
+
     public function addDespesa(){
-
-
+        // Pega os dados do usuário salva na Sessão
         $dados = session()->get('variavelDeSessao');
         $id = $dados['id'];
+
         // Busca os dados do Form e coloca em um array | PASSAR ID USUÁRIO/CATEGORIA COM SESSION!
         $date = [
             'user_id' => $id,
@@ -83,16 +92,66 @@ class GastosController extends BaseController
         $this->gastosService->inserirDespesaInDB($date);
     }
 
+    public function addDespesa1(){
+        if($this->request->getMethod() === 'post'){
+
+            // $validation = \Config\Services::validation();
+
+            // $validation->setRules($this->validationRules);
+            // Pega cada valor necessário para alterar no DB
+            // Pega os dados do usuário salva na Sessão
+            $dados = session()->get('variavelDeSessao');
+            $id = $dados['id'];
+
+            // Busca os dados do Form e coloca em um array | PASSAR ID USUÁRIO/CATEGORIA COM SESSION!
+            $date = [
+                'user_id' => $id,
+                'categoria_id' => $this->request->getPost('categoria'),
+                'valor' => $this->request->getPost('valor'),
+                'data' => $this->request->getPost('data'),
+                'descricao' => $this->request->getPost('descricao') 
+            ];
+            
+            // debug($date);
+            $this->gastosService->inserirDespesaInDB($date);
+        } else {
+            $dados = session()->get('variavelDeSessao');
+            $id = $dados['id'];
+            // Pega as despesas para exibir na tela
+            $data['gastos'] = $this->gastosService->findAllGastos($id);
+            // debug($data);
+            $data['categorias'] = $this->gastosService->findCategorias($id);
+            // $cat = $data['categorias'];
+            // foreach ($cat as $cats):
+            //     debug($cats->nome);
+            // endforeach;
+            // Vai para a View de inserir despesas
+            return view('inserirDespesa', $data);
+        }
+    }
+
     // OK -> Criar direcionamento com o ID da despesa
     public function deletarDespesa($id){
 
         // Deleta despesa passando o ID e fazendo uma verificação
         if($this->_model->delete($id, true)){
             session()->setFlashdata('sucessDeleted', 'Despesa deletada com sucesso!');
-            return redirect()->to('/addDespesa');
+            return redirect()->to('/dashboard');
         } else {
             session()->setFlashdata('errorDeleted', 'Erro ao deletar sua despesa!');
-            return redirect()->to('/addDespesa');
+            return redirect()->to('/dashboard');
+        }
+    }
+
+    public function deletarCat($id){
+
+        // Deleta despesa passando o ID e fazendo uma verificação
+        if($this->_modelCategoria->delete($id, true)){
+            session()->setFlashdata('sucessDeleted', 'Categoria deletada com sucesso!');
+            return redirect()->to('/dashboard');
+        } else {
+            session()->setFlashdata('errorDeleted', 'Erro ao deletar sua categoria!');
+            return redirect()->to('/dashboard');
         }
     }
 

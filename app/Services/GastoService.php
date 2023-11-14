@@ -23,10 +23,10 @@ class GastoService {
         // Inseri e faz uma verificação para saber se adicionou de fato a despesa
         if($this->gastoModel->insert($dados)){
             session()->setFlashdata('success', 'Despesas inserida com sucesso!');
-            return redirect()->to('addDespesa');
+            return redirect()->to(site_url('/dashboard'));
         } else {
             session()->setFlashdata('error', 'Erro ao inserir despesa!');
-            return redirect()->to('addDespesa');
+            return redirect()->to(site_url('/dashboard'));
         }
     }
 
@@ -48,6 +48,18 @@ class GastoService {
     public function findCategorias($id){
         // Busca todas as categorias no DB
         return $this->categoriaModel->where('usuarios_id', $id)->findAll();
+    }
+
+    public function addCategoria($dados){
+
+        // Inseri e faz uma verificação para saber se adicionou de fato a despesa
+        if($this->categoriaModel->insert($dados)){
+            session()->setFlashdata('success', 'Categoria inserida com sucesso!');
+            return true;
+        } else {
+            session()->setFlashdata('error', 'Erro ao inserir categoria!');
+            return false;
+        }
     }    
     
 }

@@ -8,12 +8,15 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('/dashboard', 'Home::dashboard', ['filter'=>'auth']); 
 $routes->get('/gastos', 'GastosController::calcularGastos');
-$routes->get('/addDespesa', 'GastosController::addDespesaView');
+// $routes->get('/addDespesa', 'GastosController::addDespesaView');
 $routes->get('/deletarDespesa/(:num)', 'GastosController::deletarDespesa/$1');
+$routes->get('/deletarCat/(:num)', 'GastosController::deletarCat/$1');
 $routes->match(['get', 'post'], '/updateDespesa/(:num)', 'GastosController::updateDespesa/$1');
-$routes->post('/addDespesas', 'GastosController::addDespesa');
+$routes->match(['get', 'post'], '/addDespesa', 'GastosController::addDespesa1');
+// $routes->post('/addDespesas', 'GastosController::addDespesa');
 $routes->get('relatorio', 'GastosController::viewRelatorio');
 $routes->get('gerarRelatorio', 'GastosController::gerarPDF');
+$routes->post('addCat', 'GastosController::addCat');
 
 // Rotas de usuario
 $routes->get('login', 'UsuarioController::index');
