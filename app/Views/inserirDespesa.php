@@ -1,31 +1,34 @@
 <?php $this->extend('includes/template'); ?>
 <?php $this->section('content');?>
     <!-- <button class="btn btn-info shadow rounded"><a href="<?php // redirect()->to('/dashboard')?>">Voltar</a></button> -->
+    <h1 class="title">Lançamentos</h1>
+    <h1 class="textPrin">Despesas</h1>
     <div class="container form-control input-sm text-center">
         <form action="/addDespesa" method="post">
             <label for="">Valor</label><br>
-            <input type="number" name="valor" id="valor" placeholder="25" required><br>
+            <input class="input" type="number" name="valor" id="valor" placeholder="25" required><br>
             <label for="">Data</label><br>
-            <input type="date" name="data" id="data" required><br>
+            <input class="input" type="date" name="data" id="data" required><br>
             <label for="">Categoria</label><br>
             <?php $categorias = buscarCat();
             foreach ($categorias as $cat) :?>
-                <input type="radio" name="categoria" id="categoria" value="<?php echo $cat->id;?>" required><label for=""><?php echo $cat->nome; ?></label><br>
+                <input id="especialInput" type="radio" name="categoria" id="categoria" value="<?php echo $cat->id;?>" required><label for=""><?php echo $cat->nome; ?></label><br>
             <?php endforeach;?>
             <label for="">Descrição</label><br>
-            <input type="text" name="descricao" id="descricao" placeholder="Lanche" required><br><br>
+            <input class="input" type="text" name="descricao" id="descricao" placeholder="Lanche" required><br><br>
             <input type="submit" class="btn btn-success shadow rounded" value="Enviar">
         </form>
     </div>
 
+    <h1 class="textPrin" style="margin-top: 30px;">Categorias</h1>
     <div class="container form-control input-sm text-center">
         <form action="/addCat" method="post">
-            <label for="">Nome</label><br>
             <?php 
                 foreach ($categorias as $cat) :?>
-                    <label><?php echo $cat->nome; ?></label><button><a onclick="confirmarDelCat()">Deletar</a></button> <br>
-                <?php endforeach;?>
-            <input type="text" name="Nome" id="Nome" placeholder="Ex. Alimentação" required><br><br>
+                    <label><?php echo $cat->nome; ?></label><button class="btn1"><a onclick="confirmarDelCat()">Deletar</a></button> <br>
+                    <?php endforeach;?>
+                <label for="">Nome</label><br>
+            <input class="input" type="text" name="Nome" id="Nome" placeholder="Ex. Alimentação" required><br><br>
             <input type="submit" class="btn btn-success shadow rounded" value="Enviar">
         </form>
     </div>

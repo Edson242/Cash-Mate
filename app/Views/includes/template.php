@@ -44,8 +44,10 @@
             }
         }
         @media screen and (max-width: 480px){
+            /* Menu */ 
             #menu {
                 display: none;
+                font-size: 22px;
             }
             i#burguer {
                 background-color: rgb(48, 48, 48);
@@ -53,9 +55,93 @@
                 display: block;
                 text-align: center;
                 cursor: pointer;
+                font-size: 27px;
             }
-            #burguer:hover {
-                background-color: white;
+            #menu:hover {
+                color: black;
+            }
+            /* Geral */
+
+            .title {
+                font-size: 28px;
+                margin-top: 10px;
+                text-align: center;
+                font-weight: bold;
+            }
+
+            /* Usuário */
+            .text {
+                font-size: 22px;
+            }
+            .textPrin {
+                font-size: 22px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            #form {
+                display: flex;
+                flex-direction: column;
+                width: 300px;
+                height: 200px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #form > input {
+                font-size: 20px;
+                border: 1px solid rgb(48, 48, 48);
+                border-radius: 8px;
+            }
+            #form > label {
+                font-size: 20px;
+                margin-top: 15px;
+            }
+
+            #btnSub {
+                background-color: rgb(48, 48, 48);
+                color: black;
+                margin-top: 20px;
+                width: 150px;
+                height: 150px;
+                border-radius: 8px;
+                border: none;
+                box-shadow: 1px 1px 3px black;
+            }
+            #btnSub:hover {
+                background-color: black;
+                color: rgb(48, 48, 48);
+            }
+
+            /* Lançamentos */
+
+            form > .input {
+                border: 1px solid black;
+                border-radius: 8px;
+                width: 280px;
+                height: 40px;
+                font-size: 22px;
+            }
+            form > label {
+                font-size: 22px;
+                margin-top: 10px;
+                font-weight: 600;
+            }
+            #especialInput {
+                width: 20px;
+                height: 20px;
+            }
+            .btn1{
+                border: 1px solid black;
+                border-radius: 6px;
+                background-color: rgb(48, 48, 48);
+                color: black; 
+                padding: 3px 5px;
+                margin-left: 5px;
+            }
+            .btn1:hover{
+                border: 1px solid black;
+                border-radius: 6px;
+                background-color: red;
                 color: black;
             }
         }

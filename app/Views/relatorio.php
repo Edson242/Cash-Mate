@@ -8,7 +8,7 @@
 <body>
     <?php $this->extend('includes/template'); ?>
     <?php $this->section('content');?>
-    <h2>Relatório</h2>
+    <h1 class="title">Relatório</h1>
     <button><a href="/gerarRelatorio">Gerar Relatório</a></button>
     <div class="despesas">
         
