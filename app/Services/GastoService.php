@@ -23,10 +23,12 @@ class GastoService {
         // Inseri e faz uma verificação para saber se adicionou de fato a despesa
         if($this->gastoModel->insert($dados)){
             session()->setFlashdata('success', 'Despesas inserida com sucesso!');
-            return redirect()->to(site_url('/dashboard'));
+            // return redirect()->to(site_url('/dashboard'));
+            return true;
         } else {
             session()->setFlashdata('error', 'Erro ao inserir despesa!');
-            return redirect()->to(site_url('/dashboard'));
+            // return redirect()->to(site_url('/dashboard'));
+            return false;
         }
     }
 
@@ -34,10 +36,10 @@ class GastoService {
     // Verifica se deu certo o update e seta as Flash Data
         if($this->gastoModel->update($id, $dados)){
             session()->setFlashdata('successUpdate', 'Despesa alterada com sucesso!');
-            return redirect()->to('/addDespesa');
+            return true;
         }else{
             session()->setFlashdata('errorUpdate', 'Erro ao alterar a despesa!');
-            return redirect()->to('/addDespesa');
+            return false;
         }
     }
 
@@ -54,10 +56,10 @@ class GastoService {
 
         // Inseri e faz uma verificação para saber se adicionou de fato a despesa
         if($this->categoriaModel->insert($dados)){
-            session()->setFlashdata('success', 'Categoria inserida com sucesso!');
+            session()->setFlashdata('successAddCat', 'Categoria inserida com sucesso!');
             return true;
         } else {
-            session()->setFlashdata('error', 'Erro ao inserir categoria!');
+            session()->setFlashdata('errorAddCat', 'Erro ao inserir categoria!');
             return false;
         }
     }    

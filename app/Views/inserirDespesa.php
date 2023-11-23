@@ -35,7 +35,7 @@
     <script>
         function confirmarDelCat(){
                 // Exibe um diálogo de confirmação
-                if (confirm("Tem certeza que deseja excluir este item?")) {
+                if (confirm("Tem certeza que deseja excluir esta categoria?")) {
                     // Se o usuário clicar em "OK", redireciona para o controlador para excluir o item
                     <?php foreach ($categorias as $cat) :?>
                         window.location.href = "<?php echo base_url('deletarCat/') . $cat->id;?>";

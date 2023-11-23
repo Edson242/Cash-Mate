@@ -59,15 +59,15 @@ class UserService{
         }
     }
 
-    public function createUser($nome, $email, $password){
+    public function createUser($data){
 
         // Pega os dados da Entity
         $user = new Usuarios();
-        
+
         // Passa os novos dados para a Entity
-        $user->nome = $nome;
-        $user->email = $email;
-        $user->password = $password;
+        $user->nome = $data['nome'];
+        $user->email = $data['email'];
+        $user->password = $data['password'];
     
         // Salva no DB e faz uma verificação
         if($this->userModel->save($user)){

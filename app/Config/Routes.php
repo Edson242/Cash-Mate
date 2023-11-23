@@ -5,7 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'UsuarioController::index');
 $routes->get('/dashboard', 'Home::dashboard', ['filter'=>'auth']); 
 $routes->get('/gastos', 'GastosController::calcularGastos');
 // $routes->get('/addDespesa', 'GastosController::addDespesaView');

@@ -10,7 +10,7 @@
     <?php $this->extend('includes/template'); ?>
     <?php $this->section('content');?>
     <h1 class="title">Área do Usuário</h1>
-    <p class="text">Usuário: <?php print_r($dados['nome'])?></p>
+    <p class="text" id="ipc">Usuário: <?php print_r($dados['nome'])?></p>
     <p class="text">Email: <?php print_r($dados['email'])?></p>
     <p class="textPrin">Alterar Dados</p>
     <form action="/alterarDados" method="post" id="form">

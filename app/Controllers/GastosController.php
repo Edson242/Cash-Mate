@@ -7,7 +7,6 @@ use App\Models\CategoriasModel;
 use App\Models\DespesasModel;
 use App\Services\GastoService;
 use CodeIgniter\Config\Factories;
-use Dompdf\Dompdf;
 
 class GastosController extends BaseController
 {
@@ -58,20 +57,32 @@ class GastosController extends BaseController
 
     public function addCat(){
 
+            // Regras de validação
+            $validation = \Config\Services::validation();
+            $validation->setRules($this->_modelCategoria->validationRules);
+
+            // Pega o ID do usuário
             $dados = session()->get('variavelDeSessao');
             $id = $dados['id'];
 
-            // $validation = \Config\Services::validation();
-
-            // $validation->setRules($this->validationRules);
             // Pega cada valor necessário para alterar no DB
             $data = [
                 'nome' => $this->request->getPost('Nome'),
                 'usuarios_id' => $id,
             ];
             
-            // Manda os dados para o Service fazer update no DB
-            $this->gastosService->addCategoria($data) ? redirect()->to('/dashboard') : redirect()->to('/dashboard') ;
+            // Realiza a validação
+            if($validation->run($data)) {
+                // Manda os dados para o Service fazer update no DB
+                if($this->gastosService->addCategoria($data) === true){
+                    return redirect()->to('/addDespesa');
+                } else {
+                    return redirect()->to('/addDespesa');
+                }
+            } else {
+                session()->setFlashdata('errorAddCat', 'Erro ao adicionar categoria, necessário ter mínimo 5 caracteres!');
+                return redirect()->to('/addDespesa');
+            }
     }
 
     public function addDespesa(){
@@ -89,7 +100,12 @@ class GastosController extends BaseController
         ];
         
         // debug($date);
-        $this->gastosService->inserirDespesaInDB($date);
+        // $this->gastosService->inserirDespesaInDB($date);
+        if($this->gastosService->inserirDespesaInDB($date) === true){
+            return redirect()->to('/dashboard');
+        } else {
+            return redirect()->to('/dashboard');
+        }
     }
 
     public function addDespesa1(){
@@ -113,7 +129,12 @@ class GastosController extends BaseController
             ];
             
             // debug($date);
-            $this->gastosService->inserirDespesaInDB($date);
+            // $this->gastosService->inserirDespesaInDB($date);
+            if($this->gastosService->inserirDespesaInDB($date) === true){
+                return redirect()->to('/dashboard');
+            } else {
+                return redirect()->to('/dashboard');
+            }
         } else {
             $dados = session()->get('variavelDeSessao');
             $id = $dados['id'];
@@ -148,10 +169,10 @@ class GastosController extends BaseController
         // Deleta despesa passando o ID e fazendo uma verificação
         if($this->_modelCategoria->delete($id, true)){
             session()->setFlashdata('sucessDeleted', 'Categoria deletada com sucesso!');
-            return redirect()->to('/dashboard');
+            return redirect()->to('/addDespesa');
         } else {
             session()->setFlashdata('errorDeleted', 'Erro ao deletar sua categoria!');
-            return redirect()->to('/dashboard');
+            return redirect()->to('/addDespesa');
         }
     }
 
@@ -177,7 +198,11 @@ class GastosController extends BaseController
             ];
             
             // Manda os dados para o Service fazer update no DB
-            $this->gastosService->updateDespesasInDB($id, $data);
+            if( $this->gastosService->updateDespesasInDB($id, $data) === true){
+                return redirect()->to('/dashboard');
+            } else {
+                return redirect()->to('/dashboard');
+            }
 
            // Chama a View e passa os dados da despesa escolhida
         } else{
