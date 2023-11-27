@@ -25,6 +25,21 @@ class Categorias extends Migration
                 'constraint' => 11,
                 'unsigned' => true,
                 'null' => false
+            ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+                'default' => null
+            ],
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+                'default' => null
+            ],
+            'deleted_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+                'default' => null
             ]
         ]);
         $this->forge->addKey('id', true);

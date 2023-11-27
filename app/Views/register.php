@@ -13,12 +13,15 @@
  if (session()->getFlashdata('error')) : ?>
         <div class="alert alert-danger"><?= session()->getFlashdata('error'); 
 endif;
-    ?>
+?>
+<?php if(session()->getFlashdata('erroSenhaUser')): ?>
+	<div id="erroSenhaUser"><?= session()->getFlashdata('erroSenhaUser') ?></div>
+<?php endif;?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-	<title>Login V2</title>
+	<title>Registro</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -58,7 +61,7 @@ endif;
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-						<input class="input100" type="text" name="email">
+						<input class="input100" type="text" name="nome">
 						<span class="focus-input100" data-placeholder="Nome"></span>
 					</div>
 
@@ -117,6 +120,12 @@ endif;
 	<script src="./public/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="./public/js/main.js"></script>
+<!--===============================================================================================-->
+	<script>
+		setTimeout(function(){
+        document.getElementsByClassName('erroSenhaUser').style.display = 'none';
+    }, 5000);
+	</script>
 
 </body>
 </html>

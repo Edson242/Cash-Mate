@@ -63,7 +63,14 @@ class UsuarioController extends BaseController
         // Executa sua função
         if($validation->run($data)){
             // Envia esses dados para o Service criar o usuário
-            $this->userService->createUser($data);
+            if($this->userService->createUser($data) === true) {
+                return redirect()->to('/login');
+            } else {
+                return redirect()->to('/login')->with('errors', $this->userModel->errors());
+            }
+        } else {
+            session()->setFlashdata('erroSenhaUser', 'Erro ao criar o usuário, senha deve conter no mínimo 6 caracteres!');
+            return redirect()->to('/register');
         }
     }
 

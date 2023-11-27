@@ -2,8 +2,8 @@
 <?php $this->section('content');?>
     <!-- <button class="btn btn-info shadow rounded"><a href="<?php // redirect()->to('/dashboard')?>">Voltar</a></button> -->
     <h1 class="title">Lançamentos</h1>
-    <h1 class="textPrin">Despesas</h1>
-    <div class="container form-control input-sm text-center">
+    <div class="container form-control input-sm text-center form">
+        <h1 class="textPrin">Despesas</h1>
         <form action="/addDespesa" method="post">
             <label for="">Valor</label><br>
             <input class="input" type="number" name="valor" id="valor" placeholder="25" required><br>
@@ -20,8 +20,8 @@
         </form>
     </div>
 
-    <h1 class="textPrin" style="margin-top: 30px;">Categorias</h1>
-    <div class="container form-control input-sm text-center">
+    <div class="container form-control input-sm text-center form" id="formCat">
+        <h1 class="textPrin" style="margin-top: 30px;">Categorias</h1>
         <form action="/addCat" method="post">
             <?php 
                 foreach ($categorias as $cat) :?>

@@ -76,3 +76,16 @@ if(!function_exists('calcularGastos()')){
         return pila($dados);
     }
 }
+if(!function_exists('dataAtual()')){
+    
+    function dataAtual(){
+
+        // Cria um objeto DateTime representando a data e hora atuais
+        $dataAtual = new DateTime();
+
+        // Formata a data como string no formato brasileiro (dd/mm/yyyy)
+        $dataFormatada = $dataAtual->format('d-m-Y');
+
+        return $dataFormatada;
+    }
+}

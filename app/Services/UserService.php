@@ -73,10 +73,11 @@ class UserService{
         if($this->userModel->save($user)){
 
             // Flashdata para exibir nas Views 
-            session()->setFlashdata('success', 'Usuário criado com sucesso!');
-            return redirect()->to('/login');
+            session()->setFlashdata('successCreateUser', 'Usuário criado com sucesso!');
+            return true;
         } else{
-            return redirect()->back()->withInput()->with('errors', $this->userModel->errors()); 
+            session()->setFlashdata('errorCreateUser', 'Erro ao criar o usuário, favor revisar dados!');
+            return  false;  
         }
 
     }
